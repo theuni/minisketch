@@ -29,6 +29,9 @@ AC_ARG_ENABLE(benchmark,
     [use_benchmark=$enableval],
     [use_benchmark=no])
 
+dnl Check for pthread compile/link requirements
+AX_PTHREAD
+
 AX_CHECK_COMPILE_FLAG([-Werror],[CXXFLAG_WERROR="-Werror"],[CXXFLAG_WERROR=""])
 
 AX_CXX_COMPILE_STDCXX([11], [noext], [mandatory], [nodefault])
@@ -61,7 +64,7 @@ if test "x$use_ccache" != "xno"; then
   AC_MSG_RESULT($use_ccache)
 fi
 if test "x$use_ccache" = "xyes"; then
-    AX_CHECK_PREPROC_FLAG([-Qunused-arguments],[CPPFLAGS="-Qunused-arguments $CPPFLAGS"])
+    AX_CHECK_COMPILE_FLAG([-Qunused-arguments],[NOWARN_CXXFLAGS="$NOWARN_CXXFLAGS -Qunused-arguments"],,[[$CXXFLAG_WERROR]])
 fi
 
 AC_CONFIG_FILES([
