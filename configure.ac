@@ -67,6 +67,9 @@ if test "x$use_ccache" = "xyes"; then
     AX_CHECK_COMPILE_FLAG([-Qunused-arguments],[NOWARN_CXXFLAGS="$NOWARN_CXXFLAGS -Qunused-arguments"],,[[$CXXFLAG_WERROR]])
 fi
 
+DEBUG_DEFINES=-DMINISKETCH_VERIFY
+RELEASE_DEFINES=-DNDEBUG
+
 AC_CONFIG_FILES([
     Makefile
 ])
@@ -74,6 +77,8 @@ AC_CONFIG_FILES([
 AC_SUBST(CLMUL_CXXFLAGS)
 AC_SUBST(WARN_CXXFLAGS)
 AC_SUBST(NOWARN_CXXFLAGS)
+AC_SUBST(DEBUG_DEFINES)
+AC_SUBST(RELEASE_DEFINES)
 AM_CONDITIONAL([ENABLE_CLMUL],[test x$enable_clmul = xyes])
 AM_CONDITIONAL([USE_BENCHMARK], [test x"$use_benchmark" = x"yes"])
 AM_CONDITIONAL([USE_TESTS], [test x"$use_tests" != x"no"])

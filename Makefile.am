@@ -29,25 +29,28 @@ noinst_LTLIBRARIES += $(LIBMINISKETCH_FIELD_CLMUL)
 noinst_LTLIBRARIES += $(LIBMINISKETCH_FIELD_CLMUL_DEBUG)
 noinst_LTLIBRARIES += $(LIBMINISKETCH_DEBUG)
 
+# Release libs
 libminisketch_field_generic_la_SOURCES = $(MINISKETCH_FIELD_GENERIC_SOURCES_INT)
+libminisketch_field_generic_la_CPPFLAGS = $(AM_CPPFLAGS) $(RELEASE_DEFINES)
 
 libminisketch_field_clmul_la_SOURCES = $(MINISKETCH_FIELD_CLMUL_SOURCES_INT)
+libminisketch_field_clmul_la_CPPFLAGS = $(AM_CPPFLAGS) $(RELEASE_DEFINES)
 libminisketch_field_clmul_la_CXXFLAGS = $(AM_CXXFLAGS) $(CLMUL_CXXFLAGS)
 
-
 libminisketch_la_SOURCES = $(MINISKETCH_LIB_SOURCES_INT)
+libminisketch_la_CPPFLAGS = $(AM_CPPFLAGS) $(RELEASE_DEFINES)
 libminisketch_la_LIBADD = $(LIBMINISKETCH_FIELD_CLMUL) $(LIBMINISKETCH_FIELD_GENERIC)
 
+# Debug libs
 libminisketch_field_generic_debug_la_SOURCES = $(MINISKETCH_FIELD_GENERIC_SOURCES_INT)
-libminisketch_field_generic_debug_la_CPPFLAGS = $(AM_CPPFLAGS) -DMINISKETCH_VERIFY
+libminisketch_field_generic_debug_la_CPPFLAGS = $(AM_CPPFLAGS) $(DEBUG_DEFINES)
 
 libminisketch_field_clmul_debug_la_SOURCES = $(MINISKETCH_FIELD_CLMUL_SOURCES_INT)
+libminisketch_field_clmul_debug_la_CPPFLAGS = $(AM_CPPFLAGS) $(DEBUG_DEFINES)
 libminisketch_field_clmul_debug_la_CXXFLAGS = $(AM_CXXFLAGS) $(CLMUL_CXXFLAGS)
-libminisketch_field_clmul_debug_la_CPPFLAGS = $(AM_CPPFLAGS) -DMINISKETCH_VERIFY
-
 
 libminisketch_debug_la_SOURCES = $(MINISKETCH_LIB_SOURCES_INT)
-libminisketch_debug_la_CPPFLAGS = $(AM_CPPFLAGS) -DMINISKETCH_VERIFY
+libminisketch_debug_la_CPPFLAGS = $(AM_CPPFLAGS) $(DEBUG_DEFINES)
 libminisketch_debug_la_LIBADD = $(LIBMINISKETCH_FIELD_CLMUL_DEBUG) $(LIBMINISKETCH_FIELD_GENERIC_DEBUG)
 
 noinst_PROGRAMS =
