@@ -68,7 +68,7 @@ if test "x$use_ccache" = "xyes"; then
 fi
 
 DEBUG_DEFINES=-DMINISKETCH_VERIFY
-RELEASE_DEFINES=-DNDEBUG
+RELEASE_DEFINES=
 
 AC_CONFIG_FILES([
     Makefile
