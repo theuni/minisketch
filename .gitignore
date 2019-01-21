@@ -32,4 +32,5 @@ libtool
 stamp-h1
 
 test-exhaust
+test-exhaust-release
 bench

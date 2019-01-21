@@ -58,8 +58,8 @@ if USE_BENCHMARK
 noinst_PROGRAMS += bench
 endif
 if USE_TESTS
-noinst_PROGRAMS += test-exhaust
-TESTS = test-exhaust
+noinst_PROGRAMS += test-exhaust test-exhaust-release
+TESTS = test-exhaust test-exhaust-release
 endif
 
 bench_SOURCES = $(MINISKETCH_BENCH_SOURCES_INT)
@@ -72,6 +72,12 @@ test_exhaust_CPPFLAGS = $(AM_CPPFLAGS) $(DEBUG_DEFINES)
 test_exhaust_CXXFLAGS = $(AM_CXXFLAGS) $(PTHREAD_CFLAGS)
 test_exhaust_LDADD = $(LIBMINISKETCH_DEBUG)
 test_exhaust_LDFLAGS = $(AM_LDFLAGS) $(PTHREAD_CFLAGS) -static
+
+test_exhaust_release_SOURCES = $(MINISKETCH_TEST_SOURCES_INT)
+test_exhaust_release_CPPFLAGS = $(AM_CPPFLAGS) $(RELEASE_DEFINES)
+test_exhaust_release_CXXFLAGS = $(AM_CXXFLAGS) $(PTHREAD_CFLAGS)
+test_exhaust_release_LDADD = $(LIBMINISKETCH)
+test_exhaust_release_LDFLAGS = $(AM_LDFLAGS) $(PTHREAD_CFLAGS) -static
 
 EXTRA_DIST=
 EXTRA_DIST += LICENSE
