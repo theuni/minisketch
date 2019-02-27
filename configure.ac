@@ -42,6 +42,21 @@ if test x$enable_clmul = xyes; then
   AC_DEFINE(HAVE_CLMUL, 1, [Define this symbol if clmul instructions can be used])
 fi
 
+
+AC_MSG_CHECKING(for working clz builtins)
+AC_COMPILE_IFELSE([AC_LANG_PROGRAM([], [
+  unsigned a = __builtin_clz(0);
+  unsigned long b = __builtin_clzl(0);
+  unsigned long long c = __builtin_clzll(0);
+  ])],
+  [
+    AC_DEFINE(HAVE_CLZ, 1, [Define this symbol if clz builtins are present and working])
+    AC_MSG_RESULT(yes)
+  ],[
+    AC_MSG_RESULT(no)
+  ]
+)
+
 AX_CHECK_COMPILE_FLAG([-Wall],[WARN_CXXFLAGS="$WARN_CXXFLAGS -Wall"],,[[$CXXFLAG_WERROR]])
 ## Some compilers (gcc) ignore unknown -Wno-* options, but warn about all
 ## unknown options if any other warning is produced. Test the -Wfoo case, and
