@@ -45,9 +45,9 @@ fi
 
 AC_MSG_CHECKING(for working clz builtins)
 AC_COMPILE_IFELSE([AC_LANG_PROGRAM([], [
-  unsigned a = __builtin_clz(0);
-  unsigned long b = __builtin_clzl(0);
-  unsigned long long c = __builtin_clzll(0);
+  unsigned a = __builtin_clz(1);
+  unsigned long b = __builtin_clzl(1);
+  unsigned long long c = __builtin_clzll(1);
   ])],
   [
     AC_DEFINE(HAVE_CLZ, 1, [Define this symbol if clz builtins are present and working])
