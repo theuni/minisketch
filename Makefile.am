@@ -12,10 +12,10 @@ if ENABLE_CLMUL
 LIBMINISKETCH_FIELD_CLMUL = libminisketch_field_clmul.la
 endif
 if USE_TESTS
-LIBMINISKETCH_DEBUG=libminisketch_debug.la
-LIBMINISKETCH_FIELD_GENERIC_DEBUG=libminisketch_field_generic_debug.la
+LIBMINISKETCH_VERIFY=libminisketch_verify.la
+LIBMINISKETCH_FIELD_GENERIC_VERIFY=libminisketch_field_generic_verify.la
 if ENABLE_CLMUL
-LIBMINISKETCH_FIELD_CLMUL_DEBUG=libminisketch_field_clmul_debug.la
+LIBMINISKETCH_FIELD_CLMUL_VERIFY=libminisketch_field_clmul_verify.la
 endif
 endif
 
@@ -24,10 +24,10 @@ lib_LTLIBRARIES +=  $(LIBMINISKETCH)
 
 noinst_LTLIBRARIES =
 noinst_LTLIBRARIES += $(LIBMINISKETCH_FIELD_GENERIC)
-noinst_LTLIBRARIES += $(LIBMINISKETCH_FIELD_GENERIC_DEBUG)
+noinst_LTLIBRARIES += $(LIBMINISKETCH_FIELD_GENERIC_VERIFY)
 noinst_LTLIBRARIES += $(LIBMINISKETCH_FIELD_CLMUL)
-noinst_LTLIBRARIES += $(LIBMINISKETCH_FIELD_CLMUL_DEBUG)
-noinst_LTLIBRARIES += $(LIBMINISKETCH_DEBUG)
+noinst_LTLIBRARIES += $(LIBMINISKETCH_FIELD_CLMUL_VERIFY)
+noinst_LTLIBRARIES += $(LIBMINISKETCH_VERIFY)
 
 # Release libs
 libminisketch_field_generic_la_SOURCES = $(MINISKETCH_FIELD_GENERIC_SOURCES_INT)
@@ -41,17 +41,17 @@ libminisketch_la_SOURCES = $(MINISKETCH_LIB_SOURCES_INT)
 libminisketch_la_CPPFLAGS = $(AM_CPPFLAGS) $(RELEASE_DEFINES)
 libminisketch_la_LIBADD = $(LIBMINISKETCH_FIELD_CLMUL) $(LIBMINISKETCH_FIELD_GENERIC)
 
-# Debug libs
-libminisketch_field_generic_debug_la_SOURCES = $(MINISKETCH_FIELD_GENERIC_SOURCES_INT)
-libminisketch_field_generic_debug_la_CPPFLAGS = $(AM_CPPFLAGS) $(DEBUG_DEFINES)
+# Libs with extra verification checks
+libminisketch_field_generic_verify_la_SOURCES = $(MINISKETCH_FIELD_GENERIC_SOURCES_INT)
+libminisketch_field_generic_verify_la_CPPFLAGS = $(AM_CPPFLAGS) $(VERIFY_DEFINES)
 
-libminisketch_field_clmul_debug_la_SOURCES = $(MINISKETCH_FIELD_CLMUL_SOURCES_INT)
-libminisketch_field_clmul_debug_la_CPPFLAGS = $(AM_CPPFLAGS) $(DEBUG_DEFINES)
-libminisketch_field_clmul_debug_la_CXXFLAGS = $(AM_CXXFLAGS) $(CLMUL_CXXFLAGS)
+libminisketch_field_clmul_verify_la_SOURCES = $(MINISKETCH_FIELD_CLMUL_SOURCES_INT)
+libminisketch_field_clmul_verify_la_CPPFLAGS = $(AM_CPPFLAGS) $(VERIFY_DEFINES)
+libminisketch_field_clmul_verify_la_CXXFLAGS = $(AM_CXXFLAGS) $(CLMUL_CXXFLAGS)
 
-libminisketch_debug_la_SOURCES = $(MINISKETCH_LIB_SOURCES_INT)
-libminisketch_debug_la_CPPFLAGS = $(AM_CPPFLAGS) $(DEBUG_DEFINES)
-libminisketch_debug_la_LIBADD = $(LIBMINISKETCH_FIELD_CLMUL_DEBUG) $(LIBMINISKETCH_FIELD_GENERIC_DEBUG)
+libminisketch_verify_la_SOURCES = $(MINISKETCH_LIB_SOURCES_INT)
+libminisketch_verify_la_CPPFLAGS = $(AM_CPPFLAGS) $(VERIFY_DEFINES)
+libminisketch_verify_la_LIBADD = $(LIBMINISKETCH_FIELD_CLMUL_VERIFY) $(LIBMINISKETCH_FIELD_GENERIC_VERIFY)
 
 noinst_PROGRAMS =
 if USE_BENCHMARK
@@ -68,9 +68,9 @@ bench_LDADD = $(LIBMINISKETCH)
 bench_LDFLAGS = $(AM_LDFLAGS) -static
 
 test_exhaust_SOURCES = $(MINISKETCH_TEST_SOURCES_INT)
-test_exhaust_CPPFLAGS = $(AM_CPPFLAGS) $(DEBUG_DEFINES)
+test_exhaust_CPPFLAGS = $(AM_CPPFLAGS) $(VERIFY_DEFINES)
 test_exhaust_CXXFLAGS = $(AM_CXXFLAGS) $(PTHREAD_CFLAGS)
-test_exhaust_LDADD = $(LIBMINISKETCH_DEBUG)
+test_exhaust_LDADD = $(LIBMINISKETCH_VERIFY)
 test_exhaust_LDFLAGS = $(AM_LDFLAGS) $(PTHREAD_CFLAGS) -static
 
 test_exhaust_release_SOURCES = $(MINISKETCH_TEST_SOURCES_INT)
