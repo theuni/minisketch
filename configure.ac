@@ -10,6 +10,7 @@ AM_INIT_AUTOMAKE([subdir-objects foreign])
 
 LT_INIT
 LT_LANG([C++])
+AC_LANG([C++])
 
 AC_PATH_PROG(CCACHE,ccache)
 
